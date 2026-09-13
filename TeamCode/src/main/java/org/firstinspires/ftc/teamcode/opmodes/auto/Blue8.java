@@ -38,6 +38,7 @@ public class Blue8 extends CommandOpMode {
 
     private Command autoRoutine() {
         return new SequentialCommandGroup(
+                new FollowPathCommand(follower, goCollect),
                 new FollowPathCommand(follower, goShoot)
         );
     }
