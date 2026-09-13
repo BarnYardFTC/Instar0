@@ -42,7 +42,7 @@ public class Hardware {
     public Hardware(HardwareMap hwMap) {
         this.hwMap = hwMap;
         initMotors();
-        initServos();
+//        initServos();
         initSensors();
     }
 
@@ -51,10 +51,10 @@ public class Hardware {
         rightFrontDrivetrain = hwMap.get(DcMotor.class, RIGHT_FRONT_DRIVETRAIN_CONFIG_NAME);
         leftBackDrivetrain = hwMap.get(DcMotor.class, LEFT_BACK_DRIVETRAIN_CONFIG_NAME);
         rightBackDrivetrain = hwMap.get(DcMotor.class, RIGHT_BACK_DRIVETRAIN_CONFIG_NAME);
-        rightShooter = hwMap.get(DcMotorEx.class, SHOOTER_RIGHT_CONFIG_NAME);
-        leftShooter = hwMap.get(DcMotorEx.class, SHOOTER_LEFT_CONFIG_NAME);
+//        rightShooter = hwMap.get(DcMotorEx.class, SHOOTER_RIGHT_CONFIG_NAME);
+//        leftShooter = hwMap.get(DcMotorEx.class, SHOOTER_LEFT_CONFIG_NAME);
 
-        intake = hwMap.get(DcMotor.class, INTAKE_CONFIG_NAME);
+//        intake = hwMap.get(DcMotor.class, INTAKE_CONFIG_NAME);
     }
 
     private void initServos(){
@@ -63,6 +63,6 @@ public class Hardware {
 
     private void initSensors(){
         pinpoint = hwMap.get(GoBildaPinpointDriver.class, PINPOINT_CONFIG_NAME);
-//        limelight = hwMap.get(Limelight3A.class, LIMELIGHT_CONFIG_NAME);
+        limelight = hwMap.get(Limelight3A.class, LIMELIGHT_CONFIG_NAME);
     }
 }
