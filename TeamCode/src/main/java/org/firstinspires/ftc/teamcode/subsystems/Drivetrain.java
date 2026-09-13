@@ -160,6 +160,16 @@ public class Drivetrain extends SubsystemBase {
         return new InstantCommand(() -> targetAngleDifference = null, this);
     }
 
+
+    public Command updateLimelightDifferenceCommand() {
+        return new RunCommand(() -> {
+            Limelight limelight = BarnRobot.getInstance().limelight;
+            if (limelight != null && limelight.hasValidTarget()) {
+                targetAngleDifference = Math.toRadians(limelight.getTx());
+            }
+        }, this);
+    }
+
     public Command setSlowModeCommand() {
         return new InstantCommand(() -> speedModifier = SLOW_SPEED, this);
     }
