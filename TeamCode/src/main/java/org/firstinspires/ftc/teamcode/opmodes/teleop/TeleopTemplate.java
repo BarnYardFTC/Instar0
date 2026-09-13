@@ -20,11 +20,12 @@ public class TeleopTemplate {
         PhotonCore.enable();
         robot.init(opMode);
 //        robot.shooter.setDefaultCommand(robot.shooter.operateShooter());
-        robot.intake.setDefaultCommand(robot.intake.enableCommand());
+//        robot.intake.setDefaultCommand(robot.intake.enableCommand());
+        robot.drive.setDefaultCommand(robot.drive.driveFollowerCommand());
 
         // Binds
         toggleBind(GamepadKeys.Button.B, "Change speed", robot.drive.setSlowModeCommand(),  robot.drive.setFastModeCommand());
-        toggleBind(GamepadKeys.Button.X, "Intake", new SequentialCommandGroup(robot.intake.enableCommand()), new SequentialCommandGroup(robot.intake.disableCommand()));
+//        toggleBind(GamepadKeys.Button.X, "Intake", new SequentialCommandGroup(robot.intake.enableCommand()), new SequentialCommandGroup(robot.intake.disableCommand()));
     }
 
     public static void toggleBind(GamepadKeys.Button button, String description, Command command1, Command command2) {

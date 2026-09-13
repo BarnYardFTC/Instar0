@@ -40,9 +40,9 @@ public class BarnRobot {
         gamepadEx1 = new GamepadEx(opMode.gamepad1);
         pinpoint = new Pinpoint();
         drive = new Drivetrain(opMode);
-        intake = new Intake();
-        transfer = new Transfer();
-        shooter = new Shooter();
+//        intake = new Intake();
+//        transfer = new Transfer();
+//        shooter = new Shooter();
         telemetry = opMode.telemetry;
     }
 
