@@ -57,14 +57,6 @@ public class Drivetrain extends SubsystemBase {
         motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
-    /*
-     * CLASSIC DRIVE SECTION
-     * This provides raw motor power control without Pedro Pathing.
-     */
-
-    /**
-     * Drives the robot using raw mecanum motor power calculations.
-     */
     private void drive() {
         GamepadEx gamepadEx = BarnRobot.getInstance().gamepadEx1;
         double lf = gamepadEx.getLeftY() - gamepadEx.getLeftX() + gamepadEx.getRightX();
@@ -77,22 +69,12 @@ public class Drivetrain extends SubsystemBase {
         rightBack.setPower(rb * speedModifier);
     }
 
-    /**
-     * Returns a command that runs the classic raw power drive.
-     */
     public RunCommand driveCommand() {
         return new RunCommand(this::drive, this);
     }
 
-    /*
-     * PEDRO PATHING DRIVE SECTION
-     * This uses the Follower to drive and includes auto-alignment logic.
-     */
-
-    /**
-     * Drives the robot using Pedro Pathing.
-     * If a trackingPose is set, the robot will automatically rotate to face it.
-     */
+     //PEDRO PATHING DRIVE SECTION
+     //This uses the Follower to drive and includes auto-alignment logic.
     private void driveFollower() {
         GamepadEx gp = BarnRobot.getInstance().gamepadEx1;
         double x = gp.getLeftY() * speedModifier;
@@ -126,9 +108,6 @@ public class Drivetrain extends SubsystemBase {
         }
     }
 
-    /**
-     * Helper to calculate the PID power needed to snap the robot to face the trackingPose.
-     */
     private double calculateAutoAlignTurn() {
         Pose currentPose = follower.getPose();
         double targetAngle = Math.atan2(
@@ -152,10 +131,7 @@ public class Drivetrain extends SubsystemBase {
             return trackingPIDF.run();
         }
     }
-
-    /**
-     * Returns a command that runs the Pedro Pathing drive with auto-alignment.
-     */
+    
     public RunCommand driveFollowerCommand() {
         return new RunCommand(this::driveFollower, this);
     }

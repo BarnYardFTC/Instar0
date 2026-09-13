@@ -51,10 +51,6 @@ public class BarnRobot {
         drive.follower.update();
     }
 
-    /**
-     * Checks if the driver is actively moving any of the chassis control sticks.
-     * Includes a 0.05 deadzone to filter out analog joystick drift.
-     */
     public boolean sticksUsed() {
         return Math.abs(gamepadEx1.getLeftX()) > 0.05 ||
                 Math.abs(gamepadEx1.getLeftY()) > 0.05 ||
