@@ -7,6 +7,8 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.Pinpoint;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
+import org.firstinspires.ftc.teamcode.subsystems.Shooter;
+import org.firstinspires.ftc.teamcode.subsystems.Transfer;
 
 
 public class BarnRobot {
@@ -20,6 +22,8 @@ public class BarnRobot {
 
     public Pinpoint pinpoint;
     public Intake intake;
+    public Transfer transfer;
+    public Shooter shooter;
 
     public static boolean isRobotInitialized = false;
 
@@ -37,6 +41,8 @@ public class BarnRobot {
         pinpoint = new Pinpoint();
         drive = new Drivetrain(opMode);
         intake = new Intake();
+        transfer = new Transfer();
+        shooter = new Shooter();
         telemetry = opMode.telemetry;
     }
 
@@ -54,4 +60,6 @@ public class BarnRobot {
                 Math.abs(gamepadEx1.getLeftY()) > 0.05 ||
                 Math.abs(gamepadEx1.getRightX()) > 0.05;
     }
+
+    public 
 }
