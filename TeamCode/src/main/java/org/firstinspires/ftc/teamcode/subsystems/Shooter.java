@@ -33,8 +33,8 @@ public class Shooter extends SubsystemBase {
 
     public Shooter() {
 
-        shooterLeft = BarnRobot.getInstance().hardware.leftShooter;
-        shooterRight = BarnRobot.getInstance().hardware.rightShooter;
+        shooterLeft = BarnRobot.getInstance().hardware.shooterLeft;
+        shooterRight = BarnRobot.getInstance().hardware.shooterRight;
 
 
         shooterRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);

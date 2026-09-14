@@ -8,9 +8,6 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import java.util.EnumMap;
-import java.util.Map;
-
 public class Hardware {
     private HardwareMap hwMap = hardwareMap;
 
@@ -41,8 +38,8 @@ public class Hardware {
     public DcMotor rightFrontDrivetrain;
     public DcMotor leftBackDrivetrain;
     public DcMotor rightBackDrivetrain;
-    public DcMotorEx rightShooter;
-    public DcMotorEx leftShooter;
+    public DcMotorEx shooterRight;
+    public DcMotorEx shooterLeft;
 
     public DcMotor intake;
     public Servo transfer;
@@ -59,8 +56,8 @@ public class Hardware {
         rightFrontDrivetrain = hwMap.get(DcMotor.class, CONFIG.DRIVETRAIN_RF.key);
         leftBackDrivetrain = hwMap.get(DcMotor.class, CONFIG.DRIVETRAIN_LB.key);
         rightBackDrivetrain = hwMap.get(DcMotor.class, CONFIG.DRIVETRAIN_RB.key);
-        rightShooter = hwMap.get(DcMotorEx.class, CONFIG.SHOOTER_RIGHT.key);
-        leftShooter = hwMap.get(DcMotorEx.class, CONFIG.SHOOTER_LEFT.key);
+        shooterRight = hwMap.get(DcMotorEx.class, CONFIG.SHOOTER_RIGHT.key);
+        shooterLeft = hwMap.get(DcMotorEx.class, CONFIG.SHOOTER_LEFT.key);
 
         intake = hwMap.get(DcMotor.class, CONFIG.INTAKE.key);
     }
