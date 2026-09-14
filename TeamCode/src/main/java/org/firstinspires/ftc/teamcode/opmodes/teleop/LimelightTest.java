@@ -8,9 +8,10 @@ import org.firstinspires.ftc.teamcode.general.BarnRobot;
 
 @TeleOp(name = "Limelight Test", group = "test")
 public class LimelightTest extends CommandOpMode {
+    BarnRobot robot;
     @Override
     public void initialize() {
-        BarnRobot robot = BarnRobot.getInstance();
+        robot = BarnRobot.getInstance();
         TeleopTemplate.apply(this);
         robot.limelight.start();
         TeleopTemplate.toggleBind(GamepadKeys.Button.A, "Update Angle Difference", robot.drive.updateLimelightDifferenceCommand(), robot.drive.clearTargetAngleDifferenceCommand());
@@ -20,7 +21,9 @@ public class LimelightTest extends CommandOpMode {
     public void run() {
         super.run();
         TeleopTemplate.periodic();
-        BarnRobot.getInstance().limelight.periodic();
+        robot.limelight.periodic();
+        robot.telemetry.addData("ll sees? ", robot.limelight.hasValidTarget());
+        robot.telemetry.addData("tx", robot.limelight.getTx());
     }
 
     @Override
