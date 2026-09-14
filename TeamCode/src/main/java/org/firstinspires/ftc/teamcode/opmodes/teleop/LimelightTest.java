@@ -24,6 +24,7 @@ public class LimelightTest extends CommandOpMode {
         robot.limelight.periodic();
         robot.telemetry.addData("ll sees? ", robot.limelight.hasValidTarget());
         robot.telemetry.addData("tx", robot.limelight.getTx());
+        robot.telemetry.addData("ty", robot.drive.getDifference());
     }
 
     @Override

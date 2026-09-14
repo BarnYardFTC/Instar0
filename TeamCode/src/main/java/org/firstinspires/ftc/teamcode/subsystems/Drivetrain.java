@@ -170,6 +170,10 @@ public class Drivetrain extends SubsystemBase {
         }, this);
     }
 
+    public double getDifference(){
+        return targetAngleDifference;
+    }
+
     public Command setSlowModeCommand() {
         return new InstantCommand(() -> speedModifier = SLOW_SPEED, this);
     }
