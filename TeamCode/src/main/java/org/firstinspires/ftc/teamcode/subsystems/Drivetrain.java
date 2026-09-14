@@ -59,14 +59,14 @@ public class Drivetrain extends SubsystemBase {
 
     private void drive() {
         GamepadEx gamepadEx = BarnRobot.getInstance().gamepadEx1;
-        double lf = gamepadEx.getLeftY() - gamepadEx.getLeftX() + gamepadEx.getRightX();
-        double rf = gamepadEx.getLeftY() + gamepadEx.getLeftX() - gamepadEx.getRightX();
-        double lb = gamepadEx.getLeftY() + gamepadEx.getLeftX() + gamepadEx.getRightX();
-        double rb = gamepadEx.getLeftY() - gamepadEx.getLeftX() - gamepadEx.getRightX();
-        leftFront.setPower(lf * speedModifier);
-        rightFront.setPower(rf * speedModifier);
-        leftBack.setPower(lb * speedModifier);
-        rightBack.setPower(rb * speedModifier);
+        double lf_pw = gamepadEx.getLeftY() - gamepadEx.getLeftX() + gamepadEx.getRightX();
+        double rf_pw = gamepadEx.getLeftY() + gamepadEx.getLeftX() - gamepadEx.getRightX();
+        double lb_pw = gamepadEx.getLeftY() + gamepadEx.getLeftX() + gamepadEx.getRightX();
+        double rb_pw = gamepadEx.getLeftY() - gamepadEx.getLeftX() - gamepadEx.getRightX();
+        leftFront.setPower(lf_pw * speedModifier);
+        rightFront.setPower(rf_pw * speedModifier);
+        leftBack.setPower(lb_pw * speedModifier);
+        rightBack.setPower(rb_pw * speedModifier);
     }
 
     public RunCommand driveCommand() {
