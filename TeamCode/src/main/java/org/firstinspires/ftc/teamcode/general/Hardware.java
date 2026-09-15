@@ -38,8 +38,8 @@ public class Hardware {
     public DcMotor rightFrontDrivetrain;
     public DcMotor leftBackDrivetrain;
     public DcMotor rightBackDrivetrain;
-    public DcMotorEx shooterRight;
-    public DcMotorEx shooterLeft;
+    public DcMotorEx shooterMotorRight;
+    public DcMotorEx shooterMotorLeft;
 
     public DcMotor intake;
     public Servo transfer;
@@ -56,8 +56,9 @@ public class Hardware {
         rightFrontDrivetrain = hwMap.get(DcMotor.class, CONFIG.DRIVETRAIN_RF.key);
         leftBackDrivetrain = hwMap.get(DcMotor.class, CONFIG.DRIVETRAIN_LB.key);
         rightBackDrivetrain = hwMap.get(DcMotor.class, CONFIG.DRIVETRAIN_RB.key);
-        shooterRight = hwMap.get(DcMotorEx.class, CONFIG.SHOOTER_RIGHT.key);
-        shooterLeft = hwMap.get(DcMotorEx.class, CONFIG.SHOOTER_LEFT.key);
+
+        shooterMotorRight = hwMap.get(DcMotorEx.class, CONFIG.SHOOTER_RIGHT.key);
+        shooterMotorLeft = hwMap.get(DcMotorEx.class, CONFIG.SHOOTER_LEFT.key);
 
         intake = hwMap.get(DcMotor.class, CONFIG.INTAKE.key);
     }

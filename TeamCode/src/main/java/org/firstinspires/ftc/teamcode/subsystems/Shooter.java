@@ -32,15 +32,12 @@ public class Shooter extends SubsystemBase {
 
     public Shooter() {
 
-        rightMotor = BarnRobot.getInstance().hardware.shooterLeft;
-        leftMotor = BarnRobot.getInstance().hardware.shooterRight;
+        rightMotor = BarnRobot.getInstance().hardware.shooterMotorRight;
+        leftMotor = BarnRobot.getInstance().hardware.shooterMotorLeft;
 
-
-        shooterRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        shooterRight.setDirection(DcMotorSimple.Direction.FORWARD);
-        shooterRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         leftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         leftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         rightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         rightMotor.setDirection(DcMotorSimple.Direction.REVERSE);

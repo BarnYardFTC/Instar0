@@ -148,11 +148,11 @@ public class Drivetrain extends SubsystemBase {
         }
     }
 
-    public void setPassPose(Pose pose){
+    public static void setPassPose(Pose pose){
         passPose = pose;
     }
 
-    public Pose getPassPose() {
+    public static Pose getPassPose() {
         return passPose;
     }
 
