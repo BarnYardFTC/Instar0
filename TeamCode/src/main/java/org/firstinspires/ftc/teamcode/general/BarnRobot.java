@@ -24,7 +24,7 @@ public class BarnRobot {
     public Pinpoint pinpoint;
     public Limelight limelight;
     public Intake intake;
-    public Dock transfer;
+    public Dock dock;
     public Shooter shooter;
 
     public static boolean isRobotInitialized = false;
@@ -44,7 +44,7 @@ public class BarnRobot {
         limelight = new Limelight();
         drive = new Drivetrain(opMode);
         intake = new Intake();
-        transfer = new Dock();
+        dock = new Dock();
         shooter = new Shooter();
         telemetry = opMode.telemetry;
     }

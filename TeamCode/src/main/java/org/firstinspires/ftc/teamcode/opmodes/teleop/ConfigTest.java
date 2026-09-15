@@ -19,7 +19,7 @@ public class ConfigTest extends CommandOpMode {
         robot.init(this);
         robot.drive.setDefaultCommand(robot.drive.driveCommand());
         //TeleopTemplate.toggleBind(GamepadKeys.Button.B, "Intake", robot.intake.enableCommand(), robot.intake.disableCommand());
-        TeleopTemplate.toggleBind(GamepadKeys.Button.X, "Dock", robot.transfer.setPositionCommand(0), robot.transfer.setPositionCommand(1));
+        TeleopTemplate.toggleBind(GamepadKeys.Button.X, "Dock", robot.dock.setPositionCommand(0), robot.dock.setPositionCommand(1));
 
     }
 
@@ -28,6 +28,6 @@ public class ConfigTest extends CommandOpMode {
         binds.forEach(robot.telemetry::addLine);
         robot.periodic();
         super.run();
-        robot.telemetry.addData("Servo pos: ", robot.transfer.getPos());
+        robot.telemetry.addData("Servo pos: ", robot.dock.getPos());
     }
 }

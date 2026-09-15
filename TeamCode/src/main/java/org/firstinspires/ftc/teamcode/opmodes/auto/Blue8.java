@@ -14,24 +14,24 @@ import org.firstinspires.ftc.teamcode.general.Constants;
 
 @Autonomous(name = "Blue 8", group = "Blue Testing")
 public class Blue8 extends CommandOpMode {
-    BarnRobot instar0;
+    BarnRobot robot;
     Follower follower;
 
     @Override
     public void initialize() {
-        instar0 = BarnRobot.getInstance();
-        instar0.init(this);
+        robot = BarnRobot.getInstance();
+        robot.init(this);
         follower = Constants.createFollower(hardwareMap);
         BlueTemplate.buildPathChains(follower);
         follower.setStartingPose(START_POSE);
-//        instar0.shooter.operateShooter();
-        instar0.intake.enableCommand();
+        robot.shooter.operateShooter();
+        robot.intake.enableCommand();
         schedule(autoRoutine());
     }
 
     @Override
     public void run() {
-        instar0.periodic();
+        robot.periodic();
         follower.update();
         super.run();
     }

@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.opmodes.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.seattlesolvers.solverslib.command.Command;
-import com.seattlesolvers.solverslib.command.SequentialCommandGroup;
 import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 import com.seattlesolvers.solverslib.photon.PhotonCore;
 
@@ -25,7 +24,7 @@ public class TeleopTemplate {
 
         // Binds
         toggleBind(GamepadKeys.Button.B, "Change speed", robot.drive.setSlowModeCommand(),  robot.drive.setFastModeCommand());
-        toggleBind(GamepadKeys.Button.A, "Dock", robot.transfer.setPassCommand(), robot.transfer.setCollectCommand());
+        toggleBind(GamepadKeys.Button.A, "Dock", robot.dock.setPassCommand(), robot.dock.setCollectCommand());
         toggleBind(GamepadKeys.Button.Y, "Shooter", robot.shooter.turnOff(), robot.shooter.operateShooter());
         toggleBind(GamepadKeys.Button.X, "Intake", robot.intake.disableCommand(), robot.intake.enableCommand());
     }
