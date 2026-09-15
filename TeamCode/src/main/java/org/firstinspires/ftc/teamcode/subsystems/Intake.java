@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.seattlesolvers.solverslib.command.Command;
 import com.seattlesolvers.solverslib.command.InstantCommand;
+import com.seattlesolvers.solverslib.command.RunCommand;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 
 import org.firstinspires.ftc.teamcode.general.BarnRobot;
@@ -18,11 +19,11 @@ public class Intake extends SubsystemBase {
         intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
     }
 
-    public Command enableCommand(){
-        return new InstantCommand(() -> intakeMotor.setPower(1), this);
+    public RunCommand enableCommand(){
+        return new RunCommand(() -> intakeMotor.setPower(0.8), this);
     }
 
-    public Command disableCommand(){
-        return new InstantCommand(() -> intakeMotor.setPower(0), this);
+    public RunCommand disableCommand(){
+        return new RunCommand(() -> intakeMotor.setPower(0), this);
     }
 }

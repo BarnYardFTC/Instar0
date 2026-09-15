@@ -103,7 +103,4 @@ public class Shooter extends SubsystemBase {
         return new RunCommand(() -> setMotorPower(0), this);
     }
 
-    public Command turnOffInstant() {
-        return new RunCommand(() -> setMotorPower(0), this);
-    }
 }

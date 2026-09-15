@@ -11,7 +11,7 @@ public class Dock extends SubsystemBase {
     private Servo servo;
 
     private final double COLLECT_POS = 1;
-    private final double PASS_POS = 0.5; //TODO: TBD
+    private final double PASS_POS = 0.3;
     public boolean isDocCollect = true;
 
     public Dock(){

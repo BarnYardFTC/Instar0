@@ -43,9 +43,9 @@ public class BarnRobot {
         pinpoint = new Pinpoint();
         limelight = new Limelight();
         drive = new Drivetrain(opMode);
-//        intake = new Intake();
+        intake = new Intake();
         transfer = new Dock();
-//        shooter = new Shooter();
+        shooter = new Shooter();
         telemetry = opMode.telemetry;
     }
 
