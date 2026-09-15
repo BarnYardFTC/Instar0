@@ -39,7 +39,7 @@ public class Blue8 extends CommandOpMode {
     @Override
     public void end() {
         super.end();
-        robot.drive.setPassPose(robot.drive.follower.get);
+        robot.drive.setPassPose(robot.drive.follower.getPose());
     }
 
     private Command autoRoutine() {
