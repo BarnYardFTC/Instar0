@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.general.BarnRobot;
 public class MainTeleop extends CommandOpMode {
     @Override
     public void initialize() {
-        BarnRobot.getInstance().drive.setPassPose(new Pose(9.06,10.63,Math.toRadians(90)));
+//        BarnRobot.getInstance().drive.setPassPose(new Pose(9.06,10.63,Math.toRadians(90)));
         TeleopTemplate.apply(this);
     }
 

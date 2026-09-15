@@ -20,7 +20,7 @@ public class TeleopTemplate {
     public static void apply(OpMode opMode) {
         PhotonCore.enable();
         robot.init(opMode);
-        robot.drive.follower.setStartingPose(robot.drive.getPassPose());
+//        robot.drive.follower.setStartingPose(robot.drive.getPassPose());
         robot.shooter.setDefaultCommand(robot.shooter.operateShooter());
         robot.intake.setDefaultCommand(robot.intake.enableCommand());
         robot.drive.setDefaultCommand(robot.drive.driveFieldOrientedCommand());
@@ -30,7 +30,7 @@ public class TeleopTemplate {
         toggleBind(GamepadKeys.Button.A, "Dock", robot.dock.setPassCommand(), robot.dock.setCollectCommand());
         toggleBind(GamepadKeys.Button.Y, "Shooter", robot.shooter.turnOff(), robot.shooter.operateShooter());
         toggleBind(GamepadKeys.Button.X, "Intake", robot.intake.disableCommand(), robot.intake.enableCommand());
-        toggleBind(GamepadKeys.Button.DPAD_DOWN, "Goto", robot.drive.goToCommand(new Pose(45, 45, 270)), null);
+//        toggleBind(GamepadKeys.Button.DPAD_DOWN, "Goto", robot.drive.goToCommand(new Pose(45, 45, 270)), null);
     }
 
     public static void toggleBind(GamepadKeys.Button button, String description, Command command1, Command command2) {
@@ -56,6 +56,8 @@ public class TeleopTemplate {
     public static void periodic(){
         binds.forEach(robot.telemetry::addLine);
         robot.telemetry.addData("pass position:", robot.drive.getPassPose().toString());
+        robot.telemetry.addData("isShooterReady?", robot.shooter.isReady());
+        robot.telemetry.addData("ShooterSpeed: ", robot.shooter.getRPM());
         robot.periodic();
     }
 

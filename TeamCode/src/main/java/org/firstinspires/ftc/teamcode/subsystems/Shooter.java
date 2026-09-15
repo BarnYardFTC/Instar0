@@ -18,7 +18,7 @@ public class Shooter extends SubsystemBase {
 
     private double kV = 0.000176, kS = 0.09, kP = 0.00145;
 
-    public static int RPM = 1600;
+    public static int RPM = 1500 ;
 
     private DcMotorEx rightMotor;
     private DcMotorEx leftMotor;
@@ -36,11 +36,11 @@ public class Shooter extends SubsystemBase {
         leftMotor = BarnRobot.getInstance().hardware.shooterMotorLeft;
 
         leftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        leftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        leftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         rightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        rightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         lastTime = System.currentTimeMillis();
