@@ -7,20 +7,20 @@ import com.seattlesolvers.solverslib.command.SubsystemBase;
 
 import org.firstinspires.ftc.teamcode.general.BarnRobot;
 
-public class Transfer extends SubsystemBase {
-    private Servo docServo;
+public class Dock extends SubsystemBase {
+    private Servo servo;
 
-    private final double COLLECT_POS = 0.5;
-    private final double PASS_POS = 0.9;
+    private final double COLLECT_POS = 1;
+    private final double PASS_POS = 0.5; //TODO: TBD
     public boolean isDocCollect = true;
 
-    public Transfer(){
-        docServo = BarnRobot.getInstance().hardware.transfer;
-        docServo.setDirection(Servo.Direction.FORWARD);
+    public Dock(){
+        servo = BarnRobot.getInstance().hardware.transfer;
+        servo.setDirection(Servo.Direction.FORWARD);
     }
 
     private void setPosition(double pos){
-        docServo.setPosition(pos);
+        servo.setPosition(pos);
     }
 
     private void setCollect(){
@@ -31,11 +31,19 @@ public class Transfer extends SubsystemBase {
         setPosition(PASS_POS);
     }
 
+    public double getPos(){
+        return servo.getPosition();
+    }
+
     public Command setCollectCommand(){
         return new InstantCommand(() -> setCollect(), this);
     }
 
     public Command setPassCommand(){
         return new InstantCommand(() -> setPass(), this);
+    }
+
+    public Command setPositionCommand(double pos) {
+        return new InstantCommand(() -> setPosition(pos));
     }
 }

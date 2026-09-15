@@ -23,7 +23,7 @@ public class Hardware {
         SHOOTER_RIGHT("shooterMotorRight"),
         SHOOTER_LEFT("shooterMotorLeft");
 
-        private final String key;
+        public final String key;
 
         CONFIG(String key) {
             this.key = key;

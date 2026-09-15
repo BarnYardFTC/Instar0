@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.subsystems.Limelight;
 import org.firstinspires.ftc.teamcode.subsystems.Pinpoint;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.Shooter;
-import org.firstinspires.ftc.teamcode.subsystems.Transfer;
+import org.firstinspires.ftc.teamcode.subsystems.Dock;
 
 
 public class BarnRobot {
@@ -24,7 +24,7 @@ public class BarnRobot {
     public Pinpoint pinpoint;
     public Limelight limelight;
     public Intake intake;
-    public Transfer transfer;
+    public Dock transfer;
     public Shooter shooter;
 
     public static boolean isRobotInitialized = false;
@@ -44,7 +44,7 @@ public class BarnRobot {
         limelight = new Limelight();
         drive = new Drivetrain(opMode);
 //        intake = new Intake();
-//        transfer = new Transfer();
+        transfer = new Dock();
 //        shooter = new Shooter();
         telemetry = opMode.telemetry;
     }
