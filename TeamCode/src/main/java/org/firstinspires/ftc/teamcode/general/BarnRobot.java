@@ -1,6 +1,10 @@
 package org.firstinspires.ftc.teamcode.general;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.robocol.Command;
+import com.seattlesolvers.solverslib.command.InstantCommand;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -58,5 +62,9 @@ public class BarnRobot {
         return Math.abs(gamepadEx1.getLeftX()) > 0.05 ||
                 Math.abs(gamepadEx1.getLeftY()) > 0.05 ||
                 Math.abs(gamepadEx1.getRightX()) > 0.05;
+    }
+
+    public InstantCommand rumb(){
+        return new InstantCommand(() -> gamepad1.rumble(100));
     }
 }

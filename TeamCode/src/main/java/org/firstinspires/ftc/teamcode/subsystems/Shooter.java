@@ -19,7 +19,7 @@ public class Shooter extends SubsystemBase {
 
     private double kV = 0.000176, kS = 0.09, kP = 0.00145;
 
-    public static int RPM_SHOOTING_POSE = 1000;
+    public static int RPM_SHOOTING_POSE = 1600;
 
     private DcMotorEx shooterLeft;
     private DcMotorEx shooterRight;
@@ -87,7 +87,7 @@ public class Shooter extends SubsystemBase {
 
     public boolean isReady() {
         if (tgtRpm == 0) return false;
-        return (rpm > tgtRpm - 70 && rpm < tgtRpm + 70);
+        return (rpm > tgtRpm - 50 && rpm < tgtRpm + 50);
     }
 
     public void setShooterSpeed(){

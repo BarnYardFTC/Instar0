@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.qualcomm.robotcore.hardware.Servo;
 import com.seattlesolvers.solverslib.command.Command;
+import com.seattlesolvers.solverslib.command.ConditionalCommand;
 import com.seattlesolvers.solverslib.command.InstantCommand;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 
@@ -42,6 +43,14 @@ public class Dock extends SubsystemBase {
     public Command setPassCommand(){
         return new InstantCommand(() -> setPass(), this);
     }
+
+//    public ConditionalCommand setPassNShootCommand(){
+//        return new ConditionalCommand(
+//                setPassCommand(),
+//                BarnRobot.getInstance().rumb(),
+//                () -> BarnRobot.getInstance().shooter.isReady()
+//        );
+//    }
 
     public Command setPositionCommand(double pos) {
         return new InstantCommand(() -> setPosition(pos));

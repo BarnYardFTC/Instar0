@@ -20,7 +20,7 @@ public class Intake extends SubsystemBase {
     }
 
     public RunCommand enableCommand(){
-        return new RunCommand(() -> intakeMotor.setPower(0.8), this);
+        return new RunCommand(() -> intakeMotor.setPower(0.5), this);
     }
 
     public RunCommand disableCommand(){
