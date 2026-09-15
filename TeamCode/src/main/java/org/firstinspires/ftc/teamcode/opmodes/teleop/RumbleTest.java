@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.seattlesolvers.solverslib.command.CommandOpMode;
 
 @TeleOp(name = "RumbletestTelep", group = "main")
-public class rumbletest extends CommandOpMode {
+public class RumbleTest extends CommandOpMode {
     // this is the setting up of gamepad rumble
     Gamepad.RumbleEffect.Builder rumble = new Gamepad.RumbleEffect.Builder();
 

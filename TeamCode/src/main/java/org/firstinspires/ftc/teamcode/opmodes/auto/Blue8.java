@@ -36,6 +36,12 @@ public class Blue8 extends CommandOpMode {
         super.run();
     }
 
+    @Override
+    public void end() {
+        super.end();
+        robot.drive.setPassPose(robot.drive.follower.get);
+    }
+
     private Command autoRoutine() {
         return new SequentialCommandGroup(
                 new FollowPathCommand(follower, goCollect),

@@ -4,7 +4,6 @@ import com.bylazar.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.seattlesolvers.solverslib.command.Command;
 import com.seattlesolvers.solverslib.command.RunCommand;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 
@@ -13,16 +12,16 @@ import org.firstinspires.ftc.teamcode.general.BarnRobot;
 @Configurable
 public class Shooter extends SubsystemBase {
     private static final double TICKS_PER_REVOLUTION = 28;
-    private static final int MAX_RPM = 3030;
+    private static final int RPM_MAX = 3030;
 
     private static final double DELTA_TIME = 100;
 
     private double kV = 0.000176, kS = 0.09, kP = 0.00145;
 
-    public static int RPM_SHOOTING_POSE = 1600;
+    public static int RPM = 1600;
 
-    private DcMotorEx shooterLeft;
-    private DcMotorEx shooterRight;
+    private DcMotorEx rightMotor;
+    private DcMotorEx leftMotor;
 
     private double lastTime;
 
@@ -33,30 +32,32 @@ public class Shooter extends SubsystemBase {
 
     public Shooter() {
 
-        shooterLeft = BarnRobot.getInstance().hardware.shooterLeft;
-        shooterRight = BarnRobot.getInstance().hardware.shooterRight;
+        rightMotor = BarnRobot.getInstance().hardware.shooterLeft;
+        leftMotor = BarnRobot.getInstance().hardware.shooterRight;
 
 
         shooterRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         shooterRight.setDirection(DcMotorSimple.Direction.FORWARD);
         shooterRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        leftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        shooterLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        shooterLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-        shooterLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        rightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         lastTime = System.currentTimeMillis();
-        lastPosition = shooterLeft.getCurrentPosition();
+        lastPosition = rightMotor.getCurrentPosition();
         rpm = 0;
     }
 
     public void setMotorPower(double power) {
-        shooterLeft.setPower(power);
-        shooterRight.setPower(power);
+        rightMotor.setPower(power);
+        leftMotor.setPower(power);
     }
 
     public void updateRPM() {
-        int currentPosition = shooterRight.getCurrentPosition();
+        int currentPosition = leftMotor.getCurrentPosition();
         double currentTime = System.currentTimeMillis();
 
         double deltaTime = currentTime - lastTime;
@@ -91,7 +92,7 @@ public class Shooter extends SubsystemBase {
     }
 
     public void setShooterSpeed(){
-        setMotorRPM(RPM_SHOOTING_POSE);
+        setMotorRPM(RPM);
         updateRPM();
     }
 

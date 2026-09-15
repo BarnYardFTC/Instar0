@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.subsystems;
 import com.pedropathing.control.PIDFCoefficients;
 import com.pedropathing.control.PIDFController;
 import com.pedropathing.follower.Follower;
+import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.geometry.Pose;
 import com.pedropathing.math.MathFunctions;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -13,6 +14,7 @@ import com.seattlesolvers.solverslib.command.InstantCommand;
 import com.seattlesolvers.solverslib.command.RunCommand;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
+import com.seattlesolvers.solverslib.pedroCommand.FollowPathCommand;
 
 import org.firstinspires.ftc.teamcode.general.BarnRobot;
 import org.firstinspires.ftc.teamcode.general.Constants;
@@ -32,6 +34,8 @@ public class Drivetrain extends SubsystemBase {
     private Double targetAngleDifference = null;
     private final PIDFController trackingPIDF;
     private final PIDFController secondaryTrackingPIDF;
+
+    private static Pose passPose = new Pose(0,0,0);
 
     public Drivetrain(OpMode opMode) {
         speedModifier = FAST_SPEED;
@@ -126,10 +130,6 @@ public class Drivetrain extends SubsystemBase {
             return trackingPIDF.run();
         }
     }
-    
-    public RunCommand driveFollowerCommand() {
-        return new RunCommand(this::driveFollower, this);
-    }
 
     private void driveFieldOriented() {
         GamepadEx gp = BarnRobot.getInstance().gamepadEx1;
@@ -146,6 +146,28 @@ public class Drivetrain extends SubsystemBase {
         } catch (Exception e) {
             BarnRobot.getInstance().telemetry.addData("failed to set field oriented teleop", e);
         }
+    }
+
+    public void setPassPose(Pose pose){
+        passPose = pose;
+    }
+
+    public Pose getPassPose() {
+        return passPose;
+    }
+
+    public Command goToCommand(Pose pose) {
+        return new FollowPathCommand(
+                follower,
+                follower.pathBuilder()
+                        .addPath(new BezierLine(follower.getPose(), pose))
+                        .setLinearHeadingInterpolation(follower.getHeading(), pose.getHeading())
+                        .build()
+        );
+    }
+
+    public RunCommand driveFollowerCommand() {
+        return new RunCommand(this::driveFollower, this);
     }
 
     public RunCommand driveFieldOrientedCommand() {
