@@ -19,7 +19,7 @@ public class
 Constants {
 
     public static FollowerConstants followerConstants = new FollowerConstants()
-            .mass(9) //Pollen bot mass
+            .mass(10.12) //Pollen bot mass
 
             //old data
 
