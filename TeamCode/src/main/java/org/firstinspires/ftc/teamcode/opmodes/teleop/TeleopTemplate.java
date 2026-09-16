@@ -31,7 +31,7 @@ public class TeleopTemplate {
         toggleBind(GamepadKeys.Button.A, "Dock", robot.dock.setPassCommand(), robot.dock.setCollectCommand());
         toggleBind(GamepadKeys.Button.Y, "Shooter", robot.shooter.turnOff(), robot.shooter.operateShooter());
         toggleBind(GamepadKeys.Button.X, "Intake", robot.intake.disableCommand(), robot.intake.enableCommand());
-        toggleBind(GamepadKeys.Button.DPAD_DOWN, "Goto", robot.drive.goToCommand(new Pose(45, 45, 270)), null);
+        toggleBind(GamepadKeys.Button.DPAD_DOWN, "Goto", robot.drive.goToCommand(new Pose(45, 45, 270)), robot.drive.goToCommand(new Pose(45, 45, 270)));
     }
 
     public static void toggleBind(GamepadKeys.Button button, String description, Command command1, Command command2) {
