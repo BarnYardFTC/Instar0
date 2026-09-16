@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.general;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
 
+import com.bylazar.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.robocol.Command;
 import com.seattlesolvers.solverslib.command.InstantCommand;
@@ -55,7 +56,10 @@ public class BarnRobot {
 
     public void periodic() {
         telemetry.update();
-        drive.follower.update();
+        if (drive != null && drive.follower != null) { //TODO: remove when pedro tuned
+            Constants.updateFollowerCoefficients(drive.follower);
+            drive.follower.update();
+        }
     }
 
     public boolean sticksUsed() {
@@ -64,7 +68,7 @@ public class BarnRobot {
                 Math.abs(gamepadEx1.getRightX()) > 0.05;
     }
 
-    public InstantCommand rumb(){
+    public InstantCommand rumble(){
         return new InstantCommand(() -> gamepad1.rumble(100));
     }
 }

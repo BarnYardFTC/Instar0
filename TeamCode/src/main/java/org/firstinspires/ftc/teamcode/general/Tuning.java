@@ -107,6 +107,7 @@ public class Tuning extends SelectableOpMode {
 
     public static void drawCurrent() {
         try {
+            Constants.updateFollowerCoefficients(follower);
             Drawing.drawRobot(follower.getPose());
             Drawing.sendPacket();
         } catch (Exception e) {
