@@ -57,6 +57,7 @@ public class TeleopTemplate {
     public static void periodic(){
         binds.forEach(robot.telemetry::addLine);
         robot.telemetry.addData("pass position:", Drivetrain.getPassPose().toString());
+        robot.telemetry.addData("pass position:", robot.drive.follower.getPose());
         robot.telemetry.addData("isShooterReady?", robot.shooter.isReady());
         robot.telemetry.addData("ShooterSpeed: ", robot.shooter.getRPM());
         robot.periodic();
