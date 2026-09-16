@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class Hardware {
     private HardwareMap hwMap = hardwareMap;
 
-    enum CONFIG {
+    public enum CONFIG {
         DRIVETRAIN_LB("leftBackDrivetrain"),
         DRIVETRAIN_LF("leftFrontDrivetrain"),
         DRIVETRAIN_RB("rightBackDrivetrain"),
