@@ -11,6 +11,7 @@ import com.seattlesolvers.solverslib.pedroCommand.FollowPathCommand;
 
 import org.firstinspires.ftc.teamcode.general.BarnRobot;
 import org.firstinspires.ftc.teamcode.general.Constants;
+import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 
 @Autonomous(name = "Blue 8", group = "Blue Testing")
 public class Blue8 extends CommandOpMode {
@@ -39,7 +40,7 @@ public class Blue8 extends CommandOpMode {
     @Override
     public void end() {
         super.end();
-        robot.drive.setPassPose(robot.drive.follower.getPose());
+        Drivetrain.setPassPose(robot.drive.follower.getPose());
     }
 
     private Command autoRoutine() {
