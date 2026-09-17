@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.opmodes.auto;
 
-import static org.firstinspires.ftc.teamcode.opmodes.auto.BlueTemplate.*;
+import static org.firstinspires.ftc.teamcode.opmodes.auto.AutonomousTemplate.*;
 
 import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -13,8 +13,8 @@ import org.firstinspires.ftc.teamcode.general.BarnRobot;
 import org.firstinspires.ftc.teamcode.general.Constants;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 
-@Autonomous(name = "Blue 8", group = "Blue Testing")
-public class Blue8 extends CommandOpMode {
+@Autonomous(name = "Red 7", group = "Blue Testing")
+public class Red7 extends CommandOpMode {
     BarnRobot robot;
     Follower follower;
 
@@ -23,7 +23,7 @@ public class Blue8 extends CommandOpMode {
         robot = BarnRobot.getInstance();
         robot.init(this);
         follower = Constants.createFollower(hardwareMap);
-        BlueTemplate.buildPathChains(follower);
+        AutonomousTemplate.buildPathChains(follower, Alliance.RED);
         follower.setStartingPose(START_POSE);
         robot.shooter.operateShooter();
         robot.intake.enableCommand();
