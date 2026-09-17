@@ -86,7 +86,4 @@ public class Limelight extends SubsystemBase {
         super.periodic();
         update();
     }
-
-//    public void displayTelemetry(){
-//    }
 }

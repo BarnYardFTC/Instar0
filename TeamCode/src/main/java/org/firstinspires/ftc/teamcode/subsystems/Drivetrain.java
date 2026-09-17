@@ -183,14 +183,14 @@ public class Drivetrain extends SubsystemBase {
     }
 
 
-    public Command updateLimelightDifferenceCommand() {
-        return new RunCommand(() -> {
-            Limelight limelight = BarnRobot.getInstance().limelight;
-            if (limelight != null && limelight.hasValidTarget()) {
-                targetAngleDifference = Math.toRadians(limelight.getTx());
-            }
-        }, this);
-    }
+//    public Command updateLimelightDifferenceCommand() {
+//        return new RunCommand(() -> {
+//            Limelight9 limelight = BarnRobot.getInstance().limelight;
+//            if (limelight != null && limelight.hasValidTarget()) {
+//                targetAngleDifference = Math.toRadians(limelight.getTx());
+//            }
+//        }, this);
+//    }
 
     public double getDifference(){
         return targetAngleDifference;
