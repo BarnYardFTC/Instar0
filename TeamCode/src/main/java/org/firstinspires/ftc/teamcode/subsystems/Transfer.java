@@ -14,8 +14,8 @@ public class Transfer extends SubsystemBase {
     private final double DOCK_COLLECT_POS = 1;
     private final double DOCK_PASS_POS = 0.3;
 
-    private final double GUARD_COLLECT_POS = 1;
-    private final double GUARD_PASS_POS = 0.3;
+    private final double GUARD_COLLECT_POS = 0.91234;
+    private final double GUARD_PASS_POS = 0;
 
     public boolean isDocCollect = true;
     public boolean isGuardCollect = true;
@@ -25,7 +25,7 @@ public class Transfer extends SubsystemBase {
         dock = robot.hardware.dock;
         guard = robot.hardware.guard;
         dock.setDirection(Servo.Direction.FORWARD);
-        guard.setDirection(Servo.Direction.FORWARD);
+        guard.setDirection(Servo.Direction.REVERSE);
     }
 
     private void setDockPosition(double pos){
