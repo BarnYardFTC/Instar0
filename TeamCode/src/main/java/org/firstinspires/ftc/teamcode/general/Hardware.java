@@ -19,7 +19,8 @@ public class Hardware {
         PINPOINT("pinpoint"),
         LIMELIGHT("limelight"),
         INTAKE("intakeMotor"),
-        TRANSFER("docServo"),
+        DOCK("docServo"),
+        GUARD("guardServo"),
         SHOOTER_RIGHT("shooterMotorRight"),
         SHOOTER_LEFT("shooterMotorLeft");
 
@@ -34,6 +35,7 @@ public class Hardware {
 
     public GoBildaPinpointDriver pinpoint;
 
+
     public DcMotor leftFrontDrivetrain;
     public DcMotor rightFrontDrivetrain;
     public DcMotor leftBackDrivetrain;
@@ -42,7 +44,8 @@ public class Hardware {
     public DcMotorEx shooterMotorLeft;
 
     public DcMotor intake;
-    public Servo transfer;
+    public Servo dock;
+    public Servo guard;
 
     public Hardware(HardwareMap hwMap) {
         this.hwMap = hwMap;
@@ -64,7 +67,8 @@ public class Hardware {
     }
 
     private void initServos(){
-        transfer = hwMap.get(Servo.class, CONFIG.TRANSFER.key);
+        dock = hwMap.get(Servo.class, CONFIG.DOCK.key);
+        guard = hwMap.get(Servo.class, CONFIG.GUARD.key);
     }
 
     private void initSensors(){

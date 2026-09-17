@@ -2,9 +2,7 @@ package org.firstinspires.ftc.teamcode.general;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
 
-import com.bylazar.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.robocol.Command;
 import com.seattlesolvers.solverslib.command.InstantCommand;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 
@@ -14,7 +12,7 @@ import org.firstinspires.ftc.teamcode.subsystems.Limelight;
 import org.firstinspires.ftc.teamcode.subsystems.Pinpoint;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.Shooter;
-import org.firstinspires.ftc.teamcode.subsystems.Dock;
+import org.firstinspires.ftc.teamcode.subsystems.Transfer;
 
 
 public class BarnRobot {
@@ -29,7 +27,7 @@ public class BarnRobot {
     public Pinpoint pinpoint;
     public Limelight limelight;
     public Intake intake;
-    public Dock dock;
+    public Transfer transfer;
     public Shooter shooter;
 
     public static boolean isRobotInitialized = false;
@@ -49,7 +47,7 @@ public class BarnRobot {
         limelight = new Limelight();
         drive = new Drivetrain(opMode);
         intake = new Intake();
-        dock = new Dock();
+        transfer = new Transfer();
         shooter = new Shooter();
         telemetry = opMode.telemetry;
     }
