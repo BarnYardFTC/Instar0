@@ -59,7 +59,7 @@ public class Transfer extends SubsystemBase {
     }
 
     public Command setCollectCommand(){
-        return new InstantCommand(() -> setCollect(), this);
+        return new InstantCommand(this::setCollect, this);
     }
 
     public Command setPassCommand(){

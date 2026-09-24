@@ -35,7 +35,7 @@ public class Drivetrain extends SubsystemBase {
     private final PIDFController trackingPIDF;
     private final PIDFController secondaryTrackingPIDF;
 
-    private static Pose passPose = new Pose(0,0,0);
+    private static Pose passPose = new Pose(0,0,Math.toRadians(90));
 
     public Drivetrain(OpMode opMode) {
         speedModifier = FAST_SPEED;
