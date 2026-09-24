@@ -25,6 +25,7 @@ public class TeleopTemplate {
         robot.shooter.setDefaultCommand(robot.shooter.operateShooter());
         robot.intake.setDefaultCommand(robot.intake.enableCommand());
         robot.drive.setDefaultCommand(robot.drive.driveFieldOrientedCommand());
+        robot.transfer.setDefaultCommand(robot.transfer.setPassCommand());
 
         // Binds
         toggleBind(GamepadKeys.Button.B, "Change speed", robot.drive.setSlowModeCommand(),  robot.drive.setFastModeCommand());

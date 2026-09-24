@@ -5,9 +5,7 @@ import com.pedropathing.geometry.Pose;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.seattlesolvers.solverslib.command.CommandOpMode;
 import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
-
 import org.firstinspires.ftc.teamcode.general.BarnRobot;
-
 import org.firstinspires.ftc.teamcode.general.BarnRobot;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 
@@ -28,7 +26,7 @@ public class MainTeleop extends CommandOpMode {
     @Override
     public void end() {
         super.end();
-        Drivetrain.setPassPose(BarnRobot.getInstance().drive.follower.getPose());
+        //Drivetrain.setPassPose(BarnRobot.getInstance().drive.follower.getPose());
         TeleopTemplate.end();
     }
 }
