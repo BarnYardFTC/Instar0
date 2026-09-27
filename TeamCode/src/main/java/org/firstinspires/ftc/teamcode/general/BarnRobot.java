@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.general;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.robocol.Command;
 import com.seattlesolvers.solverslib.command.InstantCommand;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 
@@ -13,7 +12,7 @@ import org.firstinspires.ftc.teamcode.subsystems.Limelight;
 import org.firstinspires.ftc.teamcode.subsystems.Pinpoint;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.Shooter;
-import org.firstinspires.ftc.teamcode.subsystems.Dock;
+import org.firstinspires.ftc.teamcode.subsystems.Transfer;
 
 
 public class BarnRobot {
@@ -28,7 +27,7 @@ public class BarnRobot {
     public Pinpoint pinpoint;
     public Limelight limelight;
     public Intake intake;
-    public Dock dock;
+    public Transfer transfer;
     public Shooter shooter;
 
     public static boolean isRobotInitialized = false;
@@ -42,20 +41,19 @@ public class BarnRobot {
     }
 
     public void init(OpMode opMode) {
-        hardware = new Hardware(opMode.hardwareMap);
+        hardware = new Hardware(opMode.hardwareMap, false);
         gamepadEx1 = new GamepadEx(opMode.gamepad1);
         pinpoint = new Pinpoint();
         limelight = new Limelight();
         drive = new Drivetrain(opMode);
         intake = new Intake();
-        dock = new Dock();
+        transfer = new Transfer();
         shooter = new Shooter();
         telemetry = opMode.telemetry;
     }
 
     public void periodic() {
         telemetry.update();
-        drive.follower.update();
     }
 
     public boolean sticksUsed() {
@@ -64,7 +62,7 @@ public class BarnRobot {
                 Math.abs(gamepadEx1.getRightX()) > 0.05;
     }
 
-    public InstantCommand rumb(){
+    public InstantCommand rumble(){
         return new InstantCommand(() -> gamepad1.rumble(100));
     }
 }

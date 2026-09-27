@@ -5,6 +5,7 @@ import com.pedropathing.geometry.Pose;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.seattlesolvers.solverslib.command.Command;
 import com.seattlesolvers.solverslib.command.button.Trigger;
+import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 import com.seattlesolvers.solverslib.photon.PhotonCore;
 
@@ -18,20 +19,31 @@ public class TeleopTemplate {
     private static ArrayList<String> binds = new ArrayList<>();
     private static final BarnRobot robot = BarnRobot.getInstance();
 
+    public enum SONY_BUTTONS {
+        TRIANGLE(GamepadKeys.Button.Y),
+        CIRCLE(GamepadKeys.Button.B),
+        CROSS(GamepadKeys.Button.A),
+        SQUARE(GamepadKeys.Button.X);
+
+        public final GamepadKeys.Button key;
+
+        SONY_BUTTONS(GamepadKeys.Button key) {
+            this.key = key;
+        }
+    }
     public static void apply(OpMode opMode) {
         PhotonCore.enable();
         robot.init(opMode);
-        robot.drive.follower.setStartingPose(Drivetrain.getPassPose());
+
+        // Default command
         robot.shooter.setDefaultCommand(robot.shooter.operateShooter());
         robot.intake.setDefaultCommand(robot.intake.enableCommand());
         robot.drive.setDefaultCommand(robot.drive.driveFieldOrientedCommand());
 
         // Binds
         toggleBind(GamepadKeys.Button.B, "Change speed", robot.drive.setSlowModeCommand(),  robot.drive.setFastModeCommand());
-        toggleBind(GamepadKeys.Button.A, "Dock", robot.dock.setPassCommand(), robot.dock.setCollectCommand());
         toggleBind(GamepadKeys.Button.Y, "Shooter", robot.shooter.turnOff(), robot.shooter.operateShooter());
         toggleBind(GamepadKeys.Button.X, "Intake", robot.intake.disableCommand(), robot.intake.enableCommand());
-        toggleBind(GamepadKeys.Button.DPAD_DOWN, "Goto", robot.drive.goToCommand(new Pose(45, 45, 270)), robot.drive.goToCommand(new Pose(45, 45, 270)));
     }
 
     public static void toggleBind(GamepadKeys.Button button, String description, Command command1, Command command2) {
@@ -40,7 +52,8 @@ public class TeleopTemplate {
                         command1,
                         command2
                 );
-        binds.add(button.toString() + ": " + description);
+
+        binds.add(getPreferredKey(button) + ": " + description);
     }
 
     public static void triggerBind(GamepadKeys.Trigger trigger, String description, Command command, Command offCommand) {
@@ -56,7 +69,6 @@ public class TeleopTemplate {
 
     public static void periodic(){
         binds.forEach(robot.telemetry::addLine);
-        robot.telemetry.addData("pass position:", Drivetrain.getPassPose().toString());
         robot.telemetry.addData("isShooterReady?", robot.shooter.isReady());
         robot.telemetry.addData("ShooterSpeed: ", robot.shooter.getRPM());
         robot.periodic();
@@ -64,6 +76,21 @@ public class TeleopTemplate {
 
     public static void end() {
         binds.clear();
+    }
+
+    private static String getPreferredKey(GamepadKeys.Button button) {
+        switch (button) {
+            case A:
+                return SONY_BUTTONS.CROSS.toString();
+            case B:
+                return SONY_BUTTONS.CIRCLE.toString();
+            case X:
+                return SONY_BUTTONS.SQUARE.toString();
+            case Y:
+                return SONY_BUTTONS.TRIANGLE.toString();
+            default:
+                return button.toString();
+        }
     }
 }
 

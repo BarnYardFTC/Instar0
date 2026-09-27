@@ -31,12 +31,6 @@ public class Drivetrain extends SubsystemBase {
     private final double SLOW_SPEED = 0.3;
     private final double FAST_SPEED = 1.0;
 
-    private Double targetAngleDifference = null;
-    private final PIDFController trackingPIDF;
-    private final PIDFController secondaryTrackingPIDF;
-
-    private static Pose passPose = new Pose(0,0,0);
-
     public Drivetrain(OpMode opMode) {
         speedModifier = FAST_SPEED;
         leftFront = BarnRobot.getInstance().hardware.leftFrontDrivetrain;
@@ -50,8 +44,6 @@ public class Drivetrain extends SubsystemBase {
         initMotor(DcMotorSimple.Direction.FORWARD, rightBack);
 
         follower = Constants.createFollower(opMode.hardwareMap);
-        trackingPIDF = new PIDFController(Constants.followerConstants.coefficientsHeadingPIDF);
-        secondaryTrackingPIDF = new PIDFController(Constants.followerConstants.coefficientsSecondaryHeadingPIDF);
     }
 
     private void initMotor(DcMotorSimple.Direction direction, DcMotor motor) {
@@ -77,60 +69,6 @@ public class Drivetrain extends SubsystemBase {
         return new RunCommand(this::drive, this);
     }
 
-     //PEDRO PATHING DRIVE SECTION
-     //This uses the Follower to drive and includes auto-alignment logic.
-    private void driveFollower() {
-        GamepadEx gp = BarnRobot.getInstance().gamepadEx1;
-        double x = gp.getLeftY() * speedModifier;
-        double y = -gp.getLeftX() * speedModifier;
-        double stickTurn = -gp.getRightX() * speedModifier * 0.7;
-
-        double turn;
-
-        // Auto-align logic: calculate heading if tracking is active and driver isn't turning
-        if (targetAngleDifference != null && Math.abs(stickTurn) < 0.1) {
-            turn = calculateAutoAlignTurn();
-        } else {
-            // Manual override: Clear tracking if the driver touches the right stick
-            if (targetAngleDifference != null) {
-                targetAngleDifference = null;
-                // Restore original follower coefficients when manual control resumes
-                follower.setHeadingPIDFCoefficients(Constants.followerConstants.coefficientsHeadingPIDF);
-            }
-            turn = stickTurn;
-        }
-
-        // Ensure follower is awake in Teleop mode if sticks are moved or tracking is active
-        if (!follower.getTeleopDrive() && (BarnRobot.getInstance().sticksUsed() || targetAngleDifference != null)) {
-            follower.startTeleopDrive(true);
-        }
-
-        try {
-            follower.setTeleOpDrive(x, y, turn, false);
-        } catch (Exception e) {
-            BarnRobot.getInstance().telemetry.addData("failed to set teleop", e);
-        }
-    }
-
-    private double calculateAutoAlignTurn() {
-        Pose currentPose = follower.getPose();
-        double headingError = MathFunctions.normalizeAngleSigned(targetAngleDifference);
-
-        // We zero out internal PID so it doesn't conflict with our manual control input
-        follower.setHeadingPIDFCoefficients(new PIDFCoefficients(0, 0, 0, 0));
-
-        // Switch between primary and aggressive secondary PID depending on error size
-        if (Math.abs(headingError) < Constants.followerConstants.headingPIDFSwitch && Constants.followerConstants.useSecondaryHeadingPIDF) {
-            secondaryTrackingPIDF.updateError(headingError);
-            secondaryTrackingPIDF.updateFeedForwardInput(MathFunctions.getTurnDirection(currentPose.getHeading(), currentPose.getHeading() + targetAngleDifference));
-            return secondaryTrackingPIDF.run();
-        } else {
-            trackingPIDF.updateError(headingError);
-            trackingPIDF.updateFeedForwardInput(MathFunctions.getTurnDirection(currentPose.getHeading(), currentPose.getHeading() + targetAngleDifference));
-            return trackingPIDF.run();
-        }
-    }
-
     private void driveFieldOriented() {
         GamepadEx gp = BarnRobot.getInstance().gamepadEx1;
         double x = gp.getLeftY() * speedModifier;
@@ -148,52 +86,8 @@ public class Drivetrain extends SubsystemBase {
         }
     }
 
-    public static void setPassPose(Pose pose){
-        passPose = pose;
-    }
-
-    public static Pose getPassPose() {
-        return passPose;
-    }
-
-    public Command goToCommand(Pose pose) {
-        return new FollowPathCommand(
-                follower,
-                follower.pathBuilder()
-                        .addPath(new BezierLine(follower.getPose(), pose))
-                        .setLinearHeadingInterpolation(follower.getHeading(), pose.getHeading())
-                        .build()
-        );
-    }
-
-    public RunCommand driveFollowerCommand() {
-        return new RunCommand(this::driveFollower, this);
-    }
-
     public RunCommand driveFieldOrientedCommand() {
         return new RunCommand(this::driveFieldOriented, this);
-    }
-
-    public Command setTargetAngleDifferenceCommand(double angleDiff) {
-        return new InstantCommand(() -> targetAngleDifference = angleDiff, this);
-    }
-
-    public Command clearTargetAngleDifferenceCommand() {
-        return new InstantCommand(() -> targetAngleDifference = null, this);
-    }
-
-
-    public Command updateLimelightDifferenceCommand() {
-        return new RunCommand(() -> {
-            Limelight limelight = BarnRobot.getInstance().limelight;
-            if (limelight != null && limelight.hasValidTarget()) {
-                targetAngleDifference = Math.toRadians(limelight.getTx());
-            }
-        }, this);
-    }
-
-    public double getDifference(){
-        return targetAngleDifference;
     }
 
     public Command setSlowModeCommand() {

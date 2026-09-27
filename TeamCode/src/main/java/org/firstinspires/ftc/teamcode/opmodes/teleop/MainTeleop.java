@@ -12,7 +12,6 @@ import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 public class MainTeleop extends CommandOpMode {
     @Override
     public void initialize() {
-        Drivetrain.setPassPose(new Pose(9.06,10.63,Math.toRadians(90)));
         TeleopTemplate.apply(this);
     }
 
@@ -25,7 +24,6 @@ public class MainTeleop extends CommandOpMode {
     @Override
     public void end() {
         super.end();
-        Drivetrain.setPassPose(BarnRobot.getInstance().drive.follower.getPose());
         TeleopTemplate.end();
     }
 }

@@ -1,33 +1,23 @@
 package org.firstinspires.ftc.teamcode.opmodes.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.seattlesolvers.solverslib.command.CommandOpMode;
 import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 
 import org.firstinspires.ftc.teamcode.general.BarnRobot;
+import org.firstinspires.ftc.teamcode.general.Hardware;
 
 import java.util.ArrayList;
 
 @TeleOp(name = "ConfigTest", group = "test")
 public class ConfigTest extends CommandOpMode {
-    private static final BarnRobot robot = BarnRobot.getInstance();
-
-    private ArrayList<String> binds = new ArrayList<>();
-
     @Override
     public void initialize() {
-        robot.init(this);
-        robot.drive.setDefaultCommand(robot.drive.driveCommand());
-        //TeleopTemplate.toggleBind(GamepadKeys.Button.B, "Intake", robot.intake.enableCommand(), robot.intake.disableCommand());
-        TeleopTemplate.toggleBind(GamepadKeys.Button.X, "Dock", robot.dock.setPositionCommand(0), robot.dock.setPositionCommand(1));
-
+        Hardware hardware = new Hardware(this.hardwareMap, true);
     }
 
     @Override
     public void run() {
-        binds.forEach(robot.telemetry::addLine);
-        robot.periodic();
-        super.run();
-        robot.telemetry.addData("Servo pos: ", robot.dock.getPos());
     }
 }
