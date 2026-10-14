@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.subsystems;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.seattlesolvers.solverslib.command.Command;
 import com.seattlesolvers.solverslib.command.InstantCommand;
+import com.seattlesolvers.solverslib.command.RunCommand;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 
 import org.firstinspires.ftc.teamcode.general.BarnRobot;
@@ -58,14 +59,7 @@ public class Transfer extends SubsystemBase {
         return guard.getPosition();
     }
 
-    public Command setCollectCommand(){
-        return new InstantCommand(this::setCollect, this);
-    }
 
-    public Command setPassCommand(){
-
-        return new InstantCommand(() -> setPass(), this);
-    }
 
 //    public ConditionalCommand setPassNShootCommand(){
 //        return new ConditionalCommand(
@@ -80,5 +74,12 @@ public class Transfer extends SubsystemBase {
     }
     public Command setGuardPositionCommand(double pos) {
         return new InstantCommand(() -> setGuardPosition(pos));
+    }
+    public Command setCollectCommand() {
+        return new RunCommand(this::setCollect, this);
+    }
+
+    public Command setPassCommand() {
+        return new RunCommand(this::setPass, this);
     }
 }

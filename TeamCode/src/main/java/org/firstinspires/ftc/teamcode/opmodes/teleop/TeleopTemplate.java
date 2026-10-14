@@ -65,8 +65,7 @@ public class TeleopTemplate {
     }
 
     public static void end() {
-        binds.clear();
-    }
+        binds.clear();   }
 }
 
 
