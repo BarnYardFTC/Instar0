@@ -7,27 +7,26 @@ import org.firstinspires.ftc.teamcode.general.BarnRobot;
 import org.firstinspires.ftc.teamcode.subsystems.AmiShooter;
 
 @TeleOp(name = "kSTuner")
-public class kSTuner extends CommandOpMode {
+public class kSTuner extends OpMode {
 
     private final BarnRobot robot = BarnRobot.getInstance();
     private final AmiShooter amiShooter = new AmiShooter();
     public double kS = 0;
-    double[] increments = {0.000001, 0.00001,0.0001, 0.001, 0.01, 0.1};
+    double[] increments = {0.000002, 0.00002, 0.0002, 0.001, 0.01, 0.1};
     int incrementIdx = 5;
 
 
     @Override
-    public void initialize() {
+    public void init() {
         robot.init(this);
         amiShooter.init(robot.hardware);
-        // Do not call TeleopTemplate.apply(this) here so robot.shooter default command doesn't conflict with kS tuning
     }
+
     @Override
-    public void run() {
-        super.run();
-        if(gamepad1.dpadRightWasPressed() && incrementIdx < 5){
+    public void loop() {
+        if (gamepad1.dpadRightWasPressed() && incrementIdx < 5) {
             incrementIdx++;
-        }else if (gamepad1.dpadLeftWasPressed() && incrementIdx > 0){
+        } else if (gamepad1.dpadLeftWasPressed() && incrementIdx > 0) {
             incrementIdx--;
         }
 
@@ -45,13 +44,6 @@ public class kSTuner extends CommandOpMode {
         telemetry.addData("kS", "%.6f", kS);
         telemetry.addData("RPM", amiShooter.getRPM());
         telemetry.addData("ticks per sec", amiShooter.getTicksPerSec());
-        TeleopTemplate.periodic();
-
-    }
-    @Override
-    public void end() {
-        super.end();
-        TeleopTemplate.end();
 
     }
 }
